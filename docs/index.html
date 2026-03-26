@@ -14,7 +14,6 @@
         --text-main: #e8f1ff;
         --text-soft: #9cb4d8;
         --accent: #6df3ff;
-        --accent-2: #8b9bff;
         --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
       }
 
@@ -63,6 +62,16 @@
         padding: 1px;
       }
 
+      .topbar {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
       .badge {
         display: inline-flex;
         align-items: center;
@@ -74,6 +83,25 @@
         border: 1px solid rgba(156, 180, 216, 0.3);
         padding: 6px 12px;
         border-radius: 999px;
+      }
+
+      .lang-toggle {
+        border: 1px solid rgba(109, 243, 255, 0.45);
+        background: rgba(11, 19, 38, 0.9);
+        color: var(--text-main);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font: inherit;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .lang-toggle:hover,
+      .lang-toggle:focus-visible {
+        transform: translateY(-1px);
+        border-color: rgba(109, 243, 255, 0.9);
+        box-shadow: 0 8px 16px rgba(67, 187, 255, 0.2);
       }
 
       h1 {
@@ -152,32 +180,94 @@
   <body>
     <main>
       <section class="panel" aria-label="Descarga de currículums">
-        <span class="badge">Diego Bergara · CV Hub</span>
-        <h1>Currículums</h1>
-        <p>
+        <div class="topbar">
+          <span class="badge">Diego Bergara · CV Hub</span>
+          <button id="langToggle" class="lang-toggle" type="button" aria-live="polite">English</button>
+        </div>
+
+        <h1 id="title">Currículums</h1>
+        <p id="intro">
           Elegí la versión que prefieras y abrila en una nueva pestaña para descargarla o compartirla.
         </p>
 
         <div class="grid">
           <a class="cv-link" href="./resumes/CV-Diego_Bergara-EN.pdf" target="_blank" rel="noopener">
             <div>
-              <strong>Resume in English</strong>
-              <span>Professional profile and experience</span>
+              <strong id="enTitle">Ver CV en inglés</strong>
+              <span id="enCopy">Ideal para procesos internacionales y roles globales</span>
             </div>
             <span class="arrow" aria-hidden="true">→</span>
           </a>
 
           <a class="cv-link" href="./resumes/CV-Diego_Bergara-ES.pdf" target="_blank" rel="noopener">
             <div>
-              <strong>CV en Español</strong>
-              <span>Perfil profesional y experiencia</span>
+              <strong id="esTitle">Ver CV en español</strong>
+              <span id="esCopy">Perfecto para búsquedas en mercados hispanohablantes</span>
             </div>
             <span class="arrow" aria-hidden="true">→</span>
           </a>
         </div>
 
-        <footer>Diseño minimalista · estilo futurista · listo para mobile</footer>
+        <footer id="footerText">Diseño minimalista · estilo futurista · listo para mobile</footer>
       </section>
     </main>
+
+    <script>
+      const content = {
+        es: {
+          htmlLang: "es",
+          toggle: "English",
+          title: "Currículums",
+          intro: "Elegí la versión que prefieras y abrila en una nueva pestaña para descargarla o compartirla.",
+          enTitle: "Ver CV en inglés",
+          enCopy: "Ideal para procesos internacionales y roles globales",
+          esTitle: "Ver CV en español",
+          esCopy: "Perfecto para búsquedas en mercados hispanohablantes",
+          footer: "Diseño minimalista · estilo futurista · listo para mobile"
+        },
+        en: {
+          htmlLang: "en",
+          toggle: "Español",
+          title: "Resumes",
+          intro: "Choose your preferred version and open it in a new tab to download or share it.",
+          enTitle: "Open resume in English",
+          enCopy: "Best for international applications and global opportunities",
+          esTitle: "Open resume in Spanish",
+          esCopy: "Great for roles in Spanish-speaking markets",
+          footer: "Minimal design · futuristic style · mobile ready"
+        }
+      };
+
+      const nodes = {
+        title: document.getElementById("title"),
+        intro: document.getElementById("intro"),
+        enTitle: document.getElementById("enTitle"),
+        enCopy: document.getElementById("enCopy"),
+        esTitle: document.getElementById("esTitle"),
+        esCopy: document.getElementById("esCopy"),
+        footer: document.getElementById("footerText"),
+        toggle: document.getElementById("langToggle")
+      };
+
+      let currentLang = "es";
+
+      function applyLanguage(lang) {
+        const labels = content[lang];
+        document.documentElement.lang = labels.htmlLang;
+        nodes.title.textContent = labels.title;
+        nodes.intro.textContent = labels.intro;
+        nodes.enTitle.textContent = labels.enTitle;
+        nodes.enCopy.textContent = labels.enCopy;
+        nodes.esTitle.textContent = labels.esTitle;
+        nodes.esCopy.textContent = labels.esCopy;
+        nodes.footer.textContent = labels.footer;
+        nodes.toggle.textContent = labels.toggle;
+      }
+
+      nodes.toggle.addEventListener("click", () => {
+        currentLang = currentLang === "es" ? "en" : "es";
+        applyLanguage(currentLang);
+      });
+    </script>
   </body>
 </html>
