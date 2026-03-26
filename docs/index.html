@@ -158,12 +158,6 @@
         padding-left: 16px;
       }
 
-      footer {
-        margin-top: 18px;
-        font-size: 0.85rem;
-        color: rgba(156, 180, 216, 0.75);
-      }
-
       @media (max-width: 540px) {
         .cv-link {
           flex-direction: column;
@@ -208,7 +202,6 @@
           </a>
         </div>
 
-        <footer id="footerText">Diseño minimalista · estilo futurista · listo para mobile</footer>
       </section>
     </main>
 
@@ -222,8 +215,7 @@
           enTitle: "Ver CV en inglés",
           enCopy: "Ideal para procesos internacionales y roles globales",
           esTitle: "Ver CV en español",
-          esCopy: "Perfecto para búsquedas en mercados hispanohablantes",
-          footer: "Diseño minimalista · estilo futurista · listo para mobile"
+          esCopy: "Perfecto para búsquedas en mercados hispanohablantes"
         },
         en: {
           htmlLang: "en",
@@ -233,8 +225,7 @@
           enTitle: "Open resume in English",
           enCopy: "Best for international applications and global opportunities",
           esTitle: "Open resume in Spanish",
-          esCopy: "Great for roles in Spanish-speaking markets",
-          footer: "Minimal design · futuristic style · mobile ready"
+          esCopy: "Great for roles in Spanish-speaking markets"
         }
       };
 
@@ -245,7 +236,6 @@
         enCopy: document.getElementById("enCopy"),
         esTitle: document.getElementById("esTitle"),
         esCopy: document.getElementById("esCopy"),
-        footer: document.getElementById("footerText"),
         toggle: document.getElementById("langToggle")
       };
 
@@ -260,7 +250,6 @@
         nodes.enCopy.textContent = labels.enCopy;
         nodes.esTitle.textContent = labels.esTitle;
         nodes.esCopy.textContent = labels.esCopy;
-        nodes.footer.textContent = labels.footer;
         nodes.toggle.textContent = labels.toggle;
       }
 
