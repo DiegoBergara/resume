@@ -3,25 +3,260 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mis Currículums</title>
+    <title>CV | Diego Bergara</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 720px;
-        margin: 40px auto;
-        padding: 0 16px;
-        line-height: 1.5;
+      :root {
+        color-scheme: dark;
+        --bg-1: #05070f;
+        --bg-2: #0d1428;
+        --panel: rgba(12, 18, 36, 0.72);
+        --panel-border: rgba(102, 179, 255, 0.24);
+        --text-main: #e8f1ff;
+        --text-soft: #9cb4d8;
+        --accent: #6df3ff;
+        --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
       }
-      h1 { margin-bottom: 8px; }
-      ul { padding-left: 20px; }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--text-main);
+        background:
+          radial-gradient(circle at 15% -10%, rgba(141, 97, 255, 0.22), transparent 40%),
+          radial-gradient(circle at 85% 15%, rgba(64, 212, 255, 0.22), transparent 35%),
+          linear-gradient(145deg, var(--bg-1), var(--bg-2));
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      main {
+        width: min(760px, 100%);
+      }
+
+      .panel {
+        border: 1px solid var(--panel-border);
+        background: var(--panel);
+        backdrop-filter: blur(14px);
+        border-radius: 24px;
+        padding: clamp(24px, 4vw, 40px);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(130deg, rgba(109, 243, 255, 0.35), transparent 40%, rgba(139, 155, 255, 0.35));
+        mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        mask-composite: exclude;
+        padding: 1px;
+      }
+
+      .topbar {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        border: 1px solid rgba(156, 180, 216, 0.3);
+        padding: 6px 12px;
+        border-radius: 999px;
+      }
+
+      .lang-toggle {
+        border: 1px solid rgba(109, 243, 255, 0.45);
+        background: rgba(11, 19, 38, 0.9);
+        color: var(--text-main);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font: inherit;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+      }
+
+      .lang-toggle:hover,
+      .lang-toggle:focus-visible {
+        transform: translateY(-1px);
+        border-color: rgba(109, 243, 255, 0.9);
+        box-shadow: 0 8px 16px rgba(67, 187, 255, 0.2);
+      }
+
+      h1 {
+        margin: 16px 0 10px;
+        font-size: clamp(2rem, 6vw, 3rem);
+        line-height: 1.05;
+      }
+
+      p {
+        margin: 0;
+        color: var(--text-soft);
+        max-width: 60ch;
+      }
+
+      .grid {
+        margin-top: 30px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .cv-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        color: var(--text-main);
+        border: 1px solid rgba(156, 180, 216, 0.25);
+        background: linear-gradient(135deg, rgba(20, 30, 56, 0.85), rgba(12, 20, 40, 0.95));
+        border-radius: 16px;
+        padding: 16px 18px;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .cv-link:hover,
+      .cv-link:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(109, 243, 255, 0.6);
+        box-shadow: 0 12px 25px rgba(67, 187, 255, 0.2);
+      }
+
+      .cv-link strong {
+        display: block;
+        margin-bottom: 2px;
+      }
+
+      .cv-link span {
+        font-size: 0.95rem;
+        color: var(--text-soft);
+      }
+
+      .arrow {
+        color: var(--accent);
+        font-size: 1.2rem;
+        padding-left: 16px;
+      }
+
+      @media (max-width: 540px) {
+        .cv-link {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .arrow {
+          padding-left: 0;
+        }
+      }
     </style>
   </head>
   <body>
-    <h1>My resumes</h1>
-    <p>Please choose one:</p>
-    <ul>
-      <li><a href="./resumes/CV-Diego_Bergara-EN.pdf" target="_blank" rel="noopener">Resume in english</a></li>
-      <li><a href="./resumes/CV-Diego_Bergara-ES.pdf" target="_blank" rel="noopener">CV En español</a></li>
-    </ul>
+    <main>
+      <section class="panel" aria-label="Descarga de currículums">
+        <div class="topbar">
+          <span class="badge">Diego Bergara · CV Hub</span>
+          <button id="langToggle" class="lang-toggle" type="button" aria-live="polite">English</button>
+        </div>
+
+        <h1 id="title">Currículums</h1>
+        <p id="intro">
+          Elegí la versión que prefieras y abrila en una nueva pestaña para descargarla o compartirla.
+        </p>
+
+        <div class="grid">
+          <a class="cv-link" href="./resumes/CV-Diego_Bergara-EN.pdf" target="_blank" rel="noopener">
+            <div>
+              <strong id="enTitle">Ver CV en inglés</strong>
+              <span id="enCopy">Ideal para procesos internacionales y roles globales</span>
+            </div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+
+          <a class="cv-link" href="./resumes/CV-Diego_Bergara-ES.pdf" target="_blank" rel="noopener">
+            <div>
+              <strong id="esTitle">Ver CV en español</strong>
+              <span id="esCopy">Perfecto para búsquedas en mercados hispanohablantes</span>
+            </div>
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </section>
+    </main>
+
+    <script>
+      const content = {
+        es: {
+          htmlLang: "es",
+          toggle: "English",
+          title: "Currículums",
+          intro: "Elegí la versión que prefieras y abrila en una nueva pestaña para descargarla o compartirla.",
+          enTitle: "Ver CV en inglés",
+          enCopy: "Ideal para procesos internacionales y roles globales",
+          esTitle: "Ver CV en español",
+          esCopy: "Perfecto para búsquedas en mercados hispanohablantes"
+        },
+        en: {
+          htmlLang: "en",
+          toggle: "Español",
+          title: "Resumes",
+          intro: "Choose your preferred version and open it in a new tab to download or share it.",
+          enTitle: "Open resume in English",
+          enCopy: "Best for international applications and global opportunities",
+          esTitle: "Open resume in Spanish",
+          esCopy: "Great for roles in Spanish-speaking markets"
+        }
+      };
+
+      const nodes = {
+        title: document.getElementById("title"),
+        intro: document.getElementById("intro"),
+        enTitle: document.getElementById("enTitle"),
+        enCopy: document.getElementById("enCopy"),
+        esTitle: document.getElementById("esTitle"),
+        esCopy: document.getElementById("esCopy"),
+        toggle: document.getElementById("langToggle")
+      };
+
+      let currentLang = "es";
+
+      function applyLanguage(lang) {
+        const labels = content[lang];
+        document.documentElement.lang = labels.htmlLang;
+        nodes.title.textContent = labels.title;
+        nodes.intro.textContent = labels.intro;
+        nodes.enTitle.textContent = labels.enTitle;
+        nodes.enCopy.textContent = labels.enCopy;
+        nodes.esTitle.textContent = labels.esTitle;
+        nodes.esCopy.textContent = labels.esCopy;
+        nodes.toggle.textContent = labels.toggle;
+      }
+
+      nodes.toggle.addEventListener("click", () => {
+        currentLang = currentLang === "es" ? "en" : "es";
+        applyLanguage(currentLang);
+      });
+    </script>
   </body>
 </html>
